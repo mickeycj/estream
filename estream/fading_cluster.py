@@ -1,3 +1,5 @@
+from copy import deepcopy
+
 from estream.histogram import Histogram
 
 class FadingCluster:
@@ -30,10 +32,15 @@ class FadingCluster:
     Overridden methods
     """
     def __copy__(self):
-        pass
+        return self.__clone()
     
     def __deepcopy__(self, memo):
-        pass
+        copy = self.__clone()
+        copy.LS = deepcopy(self.LS)
+        copy.SS = deepcopy(self.SS)
+        copy.histograms = deepcopy(self.histograms)
+
+        return copy
     
     """
     Public methods
@@ -67,3 +74,13 @@ class FadingCluster:
     
     def add(self, vector):
         pass
+    
+    """
+    Private methods
+    """
+    def __clone(self):
+        cls = self.__class__
+        clone = cls.__new__(cls)
+        clone.__dict__.update(self.__dict__)
+
+        return clone
