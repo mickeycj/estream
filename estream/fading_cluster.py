@@ -1,4 +1,5 @@
 from copy import deepcopy
+from math import sqrt
 
 from estream.histogram import Histogram
 
@@ -43,14 +44,22 @@ class FadingCluster:
         return copy
     
     """
+    Accessor methods
+    """
+    def get_center(self):
+        return [value / self.weight for value in self.LS]
+    
+    def get_sd(self):
+        def __compute_sd(ls, ss):
+            sd = ss / self.weight -(ls / self.weight) ** 2
+
+            return sqrt(sd) if sd >= 0.00001 else 0.00001
+        
+        return [__compute_sd(ls, ss) for ls, ss in zip(self.LS, self.SS)]
+    
+    """
     Public methods
     """
-    def center(self):
-        pass
-    
-    def sd(self):
-        pass
-    
     def get_center_distance(self, other):
         pass
     
