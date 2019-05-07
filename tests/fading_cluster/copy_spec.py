@@ -26,13 +26,12 @@ with description('Fading Cluster:') as self:
             expect(self.copy.dimension).to(equal(2))
             expect(self.copy.LS).to(equal([-1.5, 2.0]))
             expect(self.copy.SS).to(equal([2.25, 4.00]))
-            histogram_1, histogram_2 = self.copy.histograms
-            expect(histogram_1.has_min).to(be_true)
-            expect(histogram_1.min).to(equal(-1.5))
-            expect(histogram_1.heights[0]).to(equal(1.0))
-            expect(histogram_2.has_min).to(be_true)
-            expect(histogram_2.min).to(equal(2.0))
-            expect(histogram_2.heights[0]).to(equal(1.0))
+            expect(self.copy.histograms[0].has_min).to(be_true)
+            expect(self.copy.histograms[0].min).to(equal(-1.5))
+            expect(self.copy.histograms[0].heights[0]).to(equal(1.0))
+            expect(self.copy.histograms[1].has_min).to(be_true)
+            expect(self.copy.histograms[1].min).to(equal(2.0))
+            expect(self.copy.histograms[1].heights[0]).to(equal(1.0))
         
         with it('should share the same instances of attributes.'):
             self.fading_cluster.LS[0] = -1.0
@@ -62,13 +61,12 @@ with description('Fading Cluster:') as self:
             expect(self.copy.dimension).to(equal(2))
             expect(self.copy.LS).to(equal([-1.5, 2.0]))
             expect(self.copy.SS).to(equal([2.25, 4.00]))
-            histogram_1, histogram_2 = self.copy.histograms
-            expect(histogram_1.has_min).to(be_true)
-            expect(histogram_1.min).to(equal(-1.5))
-            expect(histogram_1.heights[0]).to(equal(1.0))
-            expect(histogram_2.has_min).to(be_true)
-            expect(histogram_2.min).to(equal(2.0))
-            expect(histogram_2.heights[0]).to(equal(1.0))
+            expect(self.copy.histograms[0].has_min).to(be_true)
+            expect(self.copy.histograms[0].min).to(equal(-1.5))
+            expect(self.copy.histograms[0].heights[0]).to(equal(1.0))
+            expect(self.copy.histograms[1].has_min).to(be_true)
+            expect(self.copy.histograms[1].min).to(equal(2.0))
+            expect(self.copy.histograms[1].heights[0]).to(equal(1.0))
         
         with it('should not share the same instances of attributes.'):
             self.fading_cluster.LS[0] = -1.0
