@@ -47,12 +47,14 @@ class FadingCluster:
         return copy
     
     """
-    Accessor methods
+    Properties
     """
-    def get_center(self):
+    @property
+    def center(self):
         return [value / self.weight for value in self.LS]
-    
-    def get_sd(self):
+
+    @property    
+    def sd(self):
         def __compute_sd(ls, ss):
             sd = ss / self.weight -(ls / self.weight) ** 2
 
@@ -65,11 +67,11 @@ class FadingCluster:
     """
     def get_center_distance(self, other):
         return sum([abs(center - other_center) for center, other_center
-                    in zip(self.get_center(), other.get_center())]) / self.dimension
+                    in zip(self.center, other.center)]) / self.dimension
     
     def get_normalized_distance(self, vector):
         return sum([abs(center - value) / sd for center, value, sd
-                    in zip(self.get_center(), vector, self.get_sd())]) / self.dimension
+                    in zip(self.center, vector, self.sd)]) / self.dimension
     
     def fade(self, fading_factor):
         self.weight *= fading_factor

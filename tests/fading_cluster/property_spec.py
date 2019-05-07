@@ -29,7 +29,7 @@ with description('Fading Cluster:') as self:
 
                 self.fading_cluster = FadingCluster([-1.5, 2.0])
                 
-                self.center = self.fading_cluster.get_center()
+                self.center = self.fading_cluster.center
             
             with it('should return the only element as the center.'):
                 center = [round(value, 1) for value in self.center]
@@ -50,7 +50,7 @@ with description('Fading Cluster:') as self:
                 self.add(self.fading_cluster, [-2.0, 1.0])
                 self.add(self.fading_cluster, [-2.0, 2.0])
 
-                self.center = self.fading_cluster.get_center()
+                self.center = self.fading_cluster.center
             
             with it('should return the estimated center of the five elements.'):
                 center = [round(value, 1) for value in self.center]
@@ -69,7 +69,7 @@ with description('Fading Cluster:') as self:
 
                 self.fadiing_cluster = FadingCluster([-1.5, 2.0])
 
-                self.sd = self.fadiing_cluster.get_sd()
+                self.sd = self.fadiing_cluster.sd
             
             with it('should return the standard deviation of 0 for each dimension.'):
                 sd = [round(value, 1) for value in self.sd]
@@ -90,7 +90,7 @@ with description('Fading Cluster:') as self:
                 self.add(self.fading_cluster, [-2.0, 1.0])
                 self.add(self.fading_cluster, [-2.0, 2.0])
 
-                self.sd = self.fading_cluster.get_sd()
+                self.sd = self.fading_cluster.sd
             
             with it('should return the estimated standard deviation of the five elements for each dimension.'):
                 sd = [round(value, 1) for value in self.sd]
