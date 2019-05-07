@@ -16,6 +16,7 @@ with description('Fading Cluster:') as self:
             FadingCluster.id_counter = 0
 
             self.fading_cluster = FadingCluster([-1.5, 2.0])
+
             self.copy = copy(self.fading_cluster)
         
         with it('should return an exact copy.'):
@@ -51,6 +52,7 @@ with description('Fading Cluster:') as self:
             FadingCluster.id_counter = 0
 
             self.fading_cluster = FadingCluster([-1.5, 2.0])
+
             self.copy = deepcopy(self.fading_cluster)
         
         with it('should return an exact copy.'):
