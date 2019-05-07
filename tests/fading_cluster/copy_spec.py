@@ -32,6 +32,8 @@ with description('Fading Cluster:') as self:
             expect(self.copy.histograms[1].has_min).to(be_true)
             expect(self.copy.histograms[1].min).to(equal(2.0))
             expect(self.copy.histograms[1].heights[0]).to(equal(1.0))
+            expect(self.copy._FadingCluster__split_index).to(equal(-1))
+            expect(self.copy._FadingCluster__split_attr).to(equal(-1))
         
         with it('should share the same instances of attributes.'):
             self.fading_cluster.LS[0] = -1.0
@@ -67,6 +69,8 @@ with description('Fading Cluster:') as self:
             expect(self.copy.histograms[1].has_min).to(be_true)
             expect(self.copy.histograms[1].min).to(equal(2.0))
             expect(self.copy.histograms[1].heights[0]).to(equal(1.0))
+            expect(self.copy._FadingCluster__split_index).to(equal(-1))
+            expect(self.copy._FadingCluster__split_attr).to(equal(-1))
         
         with it('should not share the same instances of attributes.'):
             self.fading_cluster.LS[0] = -1.0
