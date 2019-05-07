@@ -61,10 +61,12 @@ class FadingCluster:
     Public methods
     """
     def get_center_distance(self, other):
-        pass
+        return sum([abs(center - other_center) for center, other_center
+                    in zip(self.get_center(), other.get_center())]) / self.dimension
     
     def get_normalized_distance(self, vector):
-        pass
+        return sum([abs(center - value) / sd for center, value, sd
+                    in zip(self.get_center(), vector, self.get_sd())]) / self.dimension
     
     def fade(self, fading_factor):
         pass
