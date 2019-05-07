@@ -69,7 +69,11 @@ class FadingCluster:
                     in zip(self.get_center(), vector, self.get_sd())]) / self.dimension
     
     def fade(self, fading_factor):
-        pass
+        self.weight *= fading_factor
+        self.LS = [ls * fading_factor for ls in self.LS]
+        self.SS = [ss * fading_factor for ss in self.SS]
+        for histogram in self.histograms:
+            histogram.heights = [height * fading_factor for height in histogram.heights]
     
     def can_split(self):
         pass
