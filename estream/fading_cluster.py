@@ -28,9 +28,6 @@ class FadingCluster:
             histogram = Histogram()
             histogram.add(value)
             self.histograms.append(histogram)
-        # Private fields
-        self.__split_index = -1
-        self.__split_attr = -1
     
     """
     Overridden methods
@@ -83,7 +80,7 @@ class FadingCluster:
     def can_split(self):
         pass
     
-    def split(self):
+    def split(self, split_index, split_attribute):
         pass
     
     def merge(self, other):
