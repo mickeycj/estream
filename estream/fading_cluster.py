@@ -78,7 +78,12 @@ class FadingCluster:
             histogram.heights = [height * fading_factor for height in histogram.heights]
     
     def can_split(self):
-        pass
+        for split_attribute, histogram in enumerate(self.histograms):
+            split_index = histogram.find_split_index()
+            if split_index != -1:
+                return split_index, split_attribute
+        
+        return -1, -1
     
     def split(self, split_index, split_attribute):
         pass
