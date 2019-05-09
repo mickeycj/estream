@@ -28,16 +28,13 @@ with description('Fading Cluster:') as self:
                 FadingCluster.id_counter = 0
 
                 self.fading_cluster = FadingCluster([-1.5, 2.0])
-                
-                self.center = self.fading_cluster.center
             
             with it('should return the only element as the center.'):
-                center = [round(value, 1) for value in self.center]
+                center = [round(value, 1) for value in self.fading_cluster.center]
                 expect(center).to(equal([-1.5, 2.0]))
             
             with after.all:
                 del self.fading_cluster
-                del self.center
 
         with context('and the fading cluster contains five elements,'):
 
@@ -49,16 +46,13 @@ with description('Fading Cluster:') as self:
                 self.add(self.fading_cluster, [-1.5, 1.5])
                 self.add(self.fading_cluster, [-2.0, 1.0])
                 self.add(self.fading_cluster, [-2.0, 2.0])
-
-                self.center = self.fading_cluster.center
             
             with it('should return the estimated center of the five elements.'):
-                center = [round(value, 1) for value in self.center]
+                center = [round(value, 1) for value in self.fading_cluster.center]
                 expect(center).to(equal([-1.6, 1.7]))
             
             with after.all:
                 del self.fading_cluster
-                del self.center
     
     with context('When accessing fading cluster\'s standard deviation'):
 
@@ -67,17 +61,14 @@ with description('Fading Cluster:') as self:
             with before.all:
                 FadingCluster.id_counter = 0
 
-                self.fadiing_cluster = FadingCluster([-1.5, 2.0])
-
-                self.sd = self.fadiing_cluster.sd
+                self.fading_cluster = FadingCluster([-1.5, 2.0])
             
             with it('should return the standard deviation of 0 for each dimension.'):
-                sd = [round(value, 1) for value in self.sd]
+                sd = [round(value, 1) for value in self.fading_cluster.sd]
                 expect(sd).to(equal([0.0, 0.0]))
             
             with after.all:
-                del self.fadiing_cluster
-                del self.sd
+                del self.fading_cluster
 
         with context('and the fading cluster has five elements,'):
 
@@ -89,13 +80,10 @@ with description('Fading Cluster:') as self:
                 self.add(self.fading_cluster, [-1.5, 1.5])
                 self.add(self.fading_cluster, [-2.0, 1.0])
                 self.add(self.fading_cluster, [-2.0, 2.0])
-
-                self.sd = self.fading_cluster.sd
             
             with it('should return the estimated standard deviation of the five elements for each dimension.'):
-                sd = [round(value, 1) for value in self.sd]
+                sd = [round(value, 1) for value in self.fading_cluster.sd]
                 expect(sd).to(equal([0.4, 0.4]))
             
             with after.all:
                 del self.fading_cluster
-                del self.sd
