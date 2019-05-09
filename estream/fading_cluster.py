@@ -70,6 +70,11 @@ class FadingCluster:
         return sum([abs(center - value) / sd for center, value, sd
                     in zip(self.center, vector, self.sd)]) / self.dimension
     
+    def is_overlapped(self, other, merge_threshold):
+        return sum([abs(center - other_center) - merge_threshold * (sd + other_sd)
+                    for center, other_center, sd, other_sd
+                    in zip(self.center, other.center, self.sd, other.sd)]) / self.dimension <= 1
+    
     def fade(self, fading_factor):
         self.weight *= fading_factor
         self.LS = [ls * fading_factor for ls in self.LS]
@@ -89,9 +94,6 @@ class FadingCluster:
         pass
     
     def merge(self, other):
-        pass
-    
-    def is_overlapped(self, other, threshold):
         pass
     
     def add(self, vector):
