@@ -11,6 +11,17 @@ class FadingCluster:
     id_counter = 0
 
     """
+    Class method
+    """
+    @classmethod
+    def from_fading_cluster(cls, other):
+        new = deepcopy(other)
+        new.id = FadingCluster.id_counter
+        FadingCluster.id_counter += 1
+
+        return new
+
+    """
     Constructor
     """
     def __init__(self, vector):
