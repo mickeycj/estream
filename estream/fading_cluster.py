@@ -31,7 +31,7 @@ class FadingCluster:
         # Public fields
         self.is_active = False
         self.weight = 1.0
-        self.dimension = len(vector)
+        self.dimensions = len(vector)
         self.LS = [value for value in vector]
         self.SS = [value ** 2 for value in vector]
         self.histograms = []
@@ -75,16 +75,16 @@ class FadingCluster:
     """
     def get_center_distance(self, other):
         return sum([abs(center - other_center) for center, other_center
-                    in zip(self.center, other.center)]) / self.dimension
+                    in zip(self.center, other.center)]) / self.dimensions
     
     def get_normalized_distance(self, vector):
         return sum([abs(center - value) / sd for center, value, sd
-                    in zip(self.center, vector, self.sd)]) / self.dimension
+                    in zip(self.center, vector, self.sd)]) / self.dimensions
     
     def is_overlapped(self, other, merge_threshold):
         return sum([abs(center - other_center) - merge_threshold * (sd + other_sd)
                     for center, other_center, sd, other_sd
-                    in zip(self.center, other.center, self.sd, other.sd)]) / self.dimension <= 1
+                    in zip(self.center, other.center, self.sd, other.sd)]) / self.dimensions <= 1
     
     def fade(self, fading_factor):
         self.weight *= fading_factor
@@ -116,7 +116,7 @@ class FadingCluster:
         
         new_fading_cluster = FadingCluster.from_fading_cluster(self)
         lower_factor, higher_factor = lower_weight / self.weight, higher_weight / self.weight
-        for idx in range(self.dimension):
+        for idx in range(self.dimensions):
             if idx == split_attribute:
                 new_fading_cluster.histograms[idx] = self.histograms[idx].split(split_index)
 
