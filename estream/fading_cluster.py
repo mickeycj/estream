@@ -117,10 +117,10 @@ class FadingCluster:
         new_fading_cluster = FadingCluster.from_fading_cluster(self)
         lower_factor, higher_factor = lower_weight / self.weight, higher_weight / self.weight
         for idx in range(self.dimensions):
+            histogram = self.histograms[idx]
+
             if idx == split_attribute:
                 new_fading_cluster.histograms[idx] = self.histograms[idx].split(split_index)
-
-                histogram = self.histograms[idx]
                 new_histogram = new_fading_cluster.histograms[idx]
 
                 self.LS[idx], self.SS[idx] = 0.0, 0.0
@@ -138,14 +138,15 @@ class FadingCluster:
                     new_fading_cluster.LS[idx] += new_height * new_position
                     new_fading_cluster.SS[idx] += new_height * new_position ** 2
             else:
+                new_histogram = new_fading_cluster.histograms[idx]
+
                 self.LS[idx] *= higher_factor
                 self.SS[idx] *= higher_factor
-                self.histograms[idx].heights = [height * higher_factor for height
-                                                in self.histograms[idx].heights] 
+                histogram.heights = [height * higher_factor for height in histogram.heights] 
+
                 new_fading_cluster.LS[idx] *= lower_factor
                 new_fading_cluster.SS[idx] *= lower_factor
-                new_fading_cluster.histograms[idx].heights = [height * lower_factor for height
-                                                              in new_fading_cluster.histograms[idx].heights]
+                new_histogram.heights = [height * lower_factor for height in new_histogram.heights]
         self.weight = higher_weight
         new_fading_cluster.weight = lower_weight    
 
