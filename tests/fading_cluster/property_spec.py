@@ -20,6 +20,9 @@ with description('Fading Cluster:') as self:
         for histogram, value in zip(cluster.histograms, vector):
             histogram.add(value)
 
+    """
+    Property operations
+    """
     with context('When accessing fading cluster\'s center'):
 
         with context('and the fading cluster contains one element,'):

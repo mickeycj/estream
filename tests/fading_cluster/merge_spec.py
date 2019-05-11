@@ -20,6 +20,9 @@ with description('Fading Cluster:') as self:
         for histogram, value in zip(cluster.histograms, vector):
             histogram.add(value)
 
+    """
+    Merging operation
+    """
     with context('When merging two fading clusters together,'):
 
         with before.all:

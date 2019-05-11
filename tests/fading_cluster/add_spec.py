@@ -5,6 +5,9 @@ from estream import FadingCluster
 
 with description('Fading Cluster:') as self:
 
+    """
+    Adding operation
+    """
     with context('When adding new data to the fading cluster,'):
 
         with before.all:

@@ -20,6 +20,9 @@ with description('Fading Cluster:') as self:
         for histogram, value in zip(cluster.histograms, vector):
             histogram.add(value)
 
+    """
+    Distance operations
+    """
     with context('When computing distance to another fading cluster,'):
 
         with before.all:

@@ -20,6 +20,9 @@ with description('Fading Cluster:') as self:
         for histogram, value in zip(cluster.histograms, vector):
             histogram.add(value)
 
+    """
+    Split checking operation
+    """
     with context('When check whether the fading cluster can be splitted'):
 
         with context('and the split does not appear,'):
