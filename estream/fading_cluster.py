@@ -153,7 +153,11 @@ class FadingCluster:
         return new_fading_cluster
     
     def merge(self, other):
-        pass
+        self.weight += other.weight
+        self.LS = [ls + other_ls for ls, other_ls in zip(self.LS, other.LS)]
+        self.SS = [ss + other_ss for ss, other_ss in zip(self.SS, other.SS)]
+        for histogram, other_histogram in zip(self.histograms, other.histograms):
+            histogram.merge(other_histogram)
     
     def add(self, vector):
         pass
