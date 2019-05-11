@@ -110,7 +110,7 @@ class Histogram:
         
         left_w, right_w = 0, 0
         for idx, height in enumerate(self.heights):
-            if idx < index:
+            if idx <= index:
                 left_w += height
             else:
                 right_w += height

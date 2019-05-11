@@ -15,6 +15,7 @@ with description('Histogram:') as self:
 
         with before.all:
             self.histogram = Histogram()
+
             self.copy = copy(self.histogram)
         
         with it('should return an exact copy.'):
@@ -44,6 +45,7 @@ with description('Histogram:') as self:
 
         with before.all:
             self.histogram = Histogram()
+            
             self.copy = deepcopy(self.histogram)
         
         with it('should return an exact copy.'):
