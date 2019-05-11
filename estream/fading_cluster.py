@@ -160,7 +160,11 @@ class FadingCluster:
             histogram.merge(other_histogram)
     
     def add(self, vector):
-        pass
+        self.weight += 1.0
+        self.LS = [ls + value for ls, value in zip(self.LS, vector)]
+        self.SS = [ss + value ** 2 for ss, value in zip(self.SS, vector)]
+        for histogram, value in zip(self.histograms, vector):
+            histogram.add(value)
     
     """
     Private methods
