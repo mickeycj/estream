@@ -1,4 +1,4 @@
-class Estream:
+class EStream:
     
     """
     Constructor
