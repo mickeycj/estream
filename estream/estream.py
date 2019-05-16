@@ -16,7 +16,7 @@ class EStream:
         self.active_threshold = active_threshold
         # Private fields
         self.__clusters = []
-        self.__initialized = False
+        self.__is_initialized = False
     
     """
     Properties
@@ -41,13 +41,19 @@ class EStream:
     Public method
     """
     def fit(self, X):
-        pass
+        for vector in X:
+            self.__fit_vector(vector)
+        
+        return self.active_clusters
     
     """
     Private methods
     """
     def __fit_vector(self, vector):
-        pass
+        if self.__is_initialized:
+            self.__initialize(vector)
+        else:
+            self.__cluster(vector)
 
     def __initialize(self, vector):
         pass
