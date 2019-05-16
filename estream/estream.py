@@ -22,20 +22,20 @@ class EStream:
     Properties
     """
     @property
-    def num_clusters(self):
-        pass
-
-    @property
     def clusters(self):
-        pass
+        return [cluster for cluster in self.__clusters]
     
     @property
     def active_clusters(self):
-        pass
+        return [cluster for cluster in self.__clusters if cluster.is_active]
     
     @property
     def inactive_clusters(self):
-        pass
+        return [cluster for cluster in self.__clusters if not cluster.is_active]
+    
+    @property
+    def num_clusters(self):
+        return sum(cluster.is_active for cluster in self.__clusters)
     
     """
     Public method
