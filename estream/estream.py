@@ -1,3 +1,5 @@
+from estream.fading_cluster import FadingCluster
+
 class EStream:
     
     """
@@ -50,13 +52,15 @@ class EStream:
     Private methods
     """
     def __fit_vector(self, vector):
-        if self.__is_initialized:
+        if not self.__is_initialized:
             self.__initialize(vector)
         else:
             self.__cluster(vector)
 
     def __initialize(self, vector):
-        pass
+        self.__clusters.append(FadingCluster(vector))
+
+        self.__is_initialized = True
     
     def __cluster(self, vector):
         pass
