@@ -11,6 +11,8 @@ with description('E-Stream:') as self:
     with context('When requesting properties,'):
 
         with before.all:
+            FadingCluster.id_counter = 0
+
             self.estream = EStream()
             self.estream._EStream__clusters = [FadingCluster([0.0, 0.0]),
                                                FadingCluster([0.0, 0.0]),
