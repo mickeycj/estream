@@ -6,7 +6,7 @@ from estream import EStream, FadingCluster
 with description('E-Stream:') as self:
 
     """
-    Initialize operation
+    Initializing operation
     """
     with context('When fitting the first vector, '):
 
@@ -15,7 +15,7 @@ with description('E-Stream:') as self:
 
             self.estream = EStream()
 
-            self.estream.fit([[1.5, 2.0]])
+            self.estream._EStream__initialize([1.5, 2.0])
         
         with it('should set its state to initialized.'):
             expect(self.estream._EStream__is_initialized).to(be_true)

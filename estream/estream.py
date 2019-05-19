@@ -63,7 +63,12 @@ class EStream:
         self.__is_initialized = True
     
     def __cluster(self, vector):
-        pass
+        self.__fade_all()
+        self.__try_split()
+        self.__try_merge()
+        self.__limit_clusters()
+        self.__update_clusters()
+        self.__add(vector)
     
     def __fade_all(self):
         pass

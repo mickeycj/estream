@@ -3,22 +3,9 @@ from mamba import after, before, context, description, it
 
 from estream import FadingCluster
 
+from tests.utils import add_vector
+
 with description('Fading Cluster:') as self:
-
-    def add(self, cluster, vector):
-        fading_factor = 0.9
-
-        cluster.weight *= fading_factor
-        cluster.LS = [ls * fading_factor for ls in cluster.LS]
-        cluster.SS = [ss * fading_factor for ss in cluster.SS]
-        for histogram in cluster.histograms:
-            histogram.heights = [height * fading_factor for height in histogram.heights]
-
-        cluster.weight += 1.0
-        cluster.LS = [ls + value for ls, value in zip(cluster.LS, vector)]
-        cluster.SS = [ss + value ** 2 for ss, value in zip(cluster.SS, vector)]
-        for histogram, value in zip(cluster.histograms, vector):
-            histogram.add(value)
 
     """
     Property operations
@@ -45,10 +32,10 @@ with description('Fading Cluster:') as self:
                 FadingCluster.id_counter = 0
 
                 self.fading_cluster = FadingCluster([-1.5, 2.0])
-                self.add(self.fading_cluster, [-1.0, 2.0])
-                self.add(self.fading_cluster, [-1.5, 1.5])
-                self.add(self.fading_cluster, [-2.0, 1.0])
-                self.add(self.fading_cluster, [-2.0, 2.0])
+                add_vector(self.fading_cluster, [-1.0, 2.0])
+                add_vector(self.fading_cluster, [-1.5, 1.5])
+                add_vector(self.fading_cluster, [-2.0, 1.0])
+                add_vector(self.fading_cluster, [-2.0, 2.0])
             
             with it('should return the estimated center of the five elements.'):
                 center = [round(value, 1) for value in self.fading_cluster.center]
@@ -79,10 +66,10 @@ with description('Fading Cluster:') as self:
                 FadingCluster.id_counter = 0
 
                 self.fading_cluster = FadingCluster([-1.5, 2.0])
-                self.add(self.fading_cluster, [-1.0, 2.0])
-                self.add(self.fading_cluster, [-1.5, 1.5])
-                self.add(self.fading_cluster, [-2.0, 1.0])
-                self.add(self.fading_cluster, [-2.0, 2.0])
+                add_vector(self.fading_cluster, [-1.0, 2.0])
+                add_vector(self.fading_cluster, [-1.5, 1.5])
+                add_vector(self.fading_cluster, [-2.0, 1.0])
+                add_vector(self.fading_cluster, [-2.0, 2.0])
             
             with it('should return the estimated standard deviation of the five elements for each dimension.'):
                 sd = [round(value, 1) for value in self.fading_cluster.sd]
