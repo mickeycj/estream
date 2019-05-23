@@ -75,7 +75,10 @@ class EStream:
             cluster.fade(self.fading_factor)
     
     def __try_split(self):
-        pass
+        for cluster in self.active_clusters:
+            split_index, split_attr = cluster.can_split()
+            if split_index != -1 and split_attr != -1:
+                self.__clusters.append(cluster.split(split_index, split_attr))
     
     def __try_merge(self):
         pass
