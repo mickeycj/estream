@@ -71,7 +71,8 @@ class EStream:
         self.__add(vector)
     
     def __fade_all(self):
-        pass
+        for cluster in self.__clusters:
+            cluster.fade(self.fading_factor)
     
     def __try_split(self):
         pass
