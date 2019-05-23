@@ -9,7 +9,7 @@ class EStream:
                  max_clusters=10,
                  stream_speed=10, decay_rate=0.1, remove_threshold=0.1,
                  merge_threshold=1.25,
-                 active_threshold=5):
+                 active_threshold=5.0):
         # Public fields
         self.max_clusters = max_clusters
         self.fading_factor = 2 ** (-decay_rate * (1 / stream_speed))
@@ -81,7 +81,17 @@ class EStream:
                 self.__clusters.append(cluster.split(split_index, split_attr))
     
     def __try_merge(self):
-        pass
+        for idx, cluster_1 in enumerate(self.active_clusters):
+            next_idx = idx + 1
+            for cluster_2 in self.active_clusters[next_idx:]:
+                if cluster_1.is_overlapped(cluster_2, self.merge_threshold):
+                    test_cluster = FadingCluster.from_fading_cluster(cluster_1)
+                    test_cluster.merge(cluster_2)
+
+                    split_index, split_attr = test_cluster.can_split()
+                    if split_index == -1 and split_attr == -1:
+                        cluster_1.merge(cluster_2)
+                        self.__clusters.remove(cluster_2)
     
     def __limit_clusters(self):
         pass
