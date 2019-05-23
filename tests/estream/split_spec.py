@@ -17,18 +17,22 @@ with description('E-Stream:') as self:
             with before.all:
                 FadingCluster.id_counter = 0
 
-                self.estream = EStream()
+                clusters = []
                 for vector in [[-1.5, 2.0], [2.0, 1.0], [3.5, -1.0]]:
                     cluster = FadingCluster(vector)
                     for _ in range(4):
                         add_vector(cluster, vector)
+                    cluster.is_active = True
                     
-                    self.estream._EStream__clusters.append(cluster)
+                    clusters.append(cluster)
+                
+                self.estream = EStream()
+                self.estream._EStream__clusters = clusters
 
                 self.estream._EStream__try_split()
             
             with it('should have the same number of clusters.'):
-                expect(self.estream.num_clusters).to(equal(0))
+                expect(self.estream.num_clusters).to(equal(3))
             
             with after.all:
                 del self.estream
@@ -38,45 +42,48 @@ with description('E-Stream:') as self:
             with before.all:
                 FadingCluster.id_counter = 0
 
-                self.estream = EStream()
-                cluster = FadingCluster([-1.5, 2.0])
+                cluster_1 = FadingCluster([-1.5, 2.0])
                 for _ in range(4):
-                    add_vector(cluster, [-1.5, 2.0])
-                self.estream._EStream__clusters.append(cluster)
-                cluster = FadingCluster([-5.0, 1.0])
+                    add_vector(cluster_1, [-1.5, 2.0])
+                cluster_1.is_active = True
+
+                cluster_2 = FadingCluster([-5.0, 1.0])
                 for _ in range(11):
-                    add_vector(cluster, [-5.0, 1.0])
+                    add_vector(cluster_2, [-5.0, 1.0])
                 for _ in range(9):
-                    add_vector(cluster, [-4.5, 1.0])
+                    add_vector(cluster_2, [-4.5, 1.0])
                 for _ in range(11):
-                    add_vector(cluster, [-3.5, 1.0])
+                    add_vector(cluster_2, [-3.5, 1.0])
                 for _ in range(10):
-                    add_vector(cluster, [-2.5, 1.0])
+                    add_vector(cluster_2, [-2.5, 1.0])
                 for _ in range(12):
-                    add_vector(cluster, [-1.0, 1.0])
+                    add_vector(cluster_2, [-1.0, 1.0])
                 for _ in range(2):
-                    add_vector(cluster, [0.5, 1.0])
+                    add_vector(cluster_2, [0.5, 1.0])
                 for _ in range(2):
-                    add_vector(cluster, [1.0, 1.0])
+                    add_vector(cluster_2, [1.0, 1.0])
                 for _ in range(11):
-                    add_vector(cluster, [2.0, 1.0])
+                    add_vector(cluster_2, [2.0, 1.0])
                 for _ in range(10):
-                    add_vector(cluster, [3.5, 1.0])
+                    add_vector(cluster_2, [3.5, 1.0])
                 for _ in range(11):
-                    add_vector(cluster, [4.0, 1.0])
-                cluster.is_active = True
-                self.estream._EStream__clusters.append(cluster)
-                cluster = FadingCluster([3.5, -1.0])
+                    add_vector(cluster_2, [4.0, 1.0])
+                cluster_2.is_active = True
+                
+                cluster_3 = FadingCluster([3.5, -1.0])
                 for _ in range(4):
-                    add_vector(cluster, [3.5, -1.0])
-                self.estream._EStream__clusters.append(cluster)
+                    add_vector(cluster_3, [3.5, -1.0])
+                cluster_3.is_active = True
+
+                self.estream = EStream()
+                self.estream._EStream__clusters = [cluster_1, cluster_2, cluster_3]
 
                 self.estream._EStream__try_split()
                 self.old_cluster = self.estream._EStream__clusters[1]
                 self.new_cluster = self.estream._EStream__clusters[-1]
             
             with it('should add a new cluster.'):
-                expect(self.estream.num_clusters).to(equal(2))
+                expect(self.estream.num_clusters).to(equal(4))
             
             with it('should have the updated weight for the old cluster'):
                 expect(round(self.old_cluster.weight, 1)).to(equal(30.4))
