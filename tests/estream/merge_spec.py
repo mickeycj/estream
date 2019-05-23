@@ -90,3 +90,4 @@ with description('E-Stream:') as self:
             
             with after.all:
                 del self.estream
+                del self.merged_cluster
