@@ -57,10 +57,12 @@ with description('E-Stream:') as self:
             
             with it('should have the updated LS for the merged cluster.'):
                 LS = [round(ls, 1) for ls in self.merged_cluster.LS]
+
                 expect(LS).to(equal([1.0, 16.7]))
             
             with it('should have the updated SS for the merged cluster.'):
                 SS = [round(ss, 1) for ss in self.merged_cluster.SS]
+
                 expect(SS).to(equal([18.8, 29.9]))
             
             with it('should have the updated heights for the histograms for the merged cluster.'):
@@ -120,10 +122,12 @@ with description('E-Stream:') as self:
             
             with it('should have the updated LS for the merged cluster.'):
                 LS = [round(ls, 1) for ls in self.merged_cluster.LS]
+
                 expect(LS).to(equal([1.0, 16.7]))
             
             with it('should have the updated SS for the merged cluster.'):
                 SS = [round(ss, 1) for ss in self.merged_cluster.SS]
+
                 expect(SS).to(equal([18.8, 29.9]))
             
             with it('should have the updated heights for the histograms for the merged cluster.'):

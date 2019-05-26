@@ -22,10 +22,12 @@ with description('Fading Cluster:') as self:
         
         with it('should have the updated LS.'):
             LS = [round(ls, 2) for ls in self.fading_cluster.LS]
+
             expect(LS).to(equal([-1.48, 1.98]))
         
         with it('should have the updated SS.'):
             SS = [round(ss, 2) for ss in self.fading_cluster.SS]
+
             expect(SS).to(equal([2.23, 3.96]))
         
         with it('should have the updated histograms.'):

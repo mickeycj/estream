@@ -52,10 +52,12 @@ with description('Histogram:') as self:
             
             with it('should have an updated upper bound for each bar for the original histogram.'):
                 upper_bounds = [round(upper_bound, 2) for upper_bound in self.histogram.upper_bounds]
+
                 expect(upper_bounds).to(equal([-4.46, -3.92, -3.38, -2.84, -2.30, -1.76, -1.22, -0.68, -0.14, 0.40]))
             
             with it('should have the updated heights for the original histogram.'):
                 heights = [round(height, 1) for height in self.histogram.heights]
+
                 expect(heights).to(equal([12.1, 10.2, 6.2, 5.3, 4.8, 4.0, 3.9, 3.9, 2.2, 1.4]))
             
             with it('should have the specified upper bound as the minimum value for the new histogram.'):
@@ -69,10 +71,12 @@ with description('Histogram:') as self:
             
             with it('should have the upper bound for each bar for the new histogram.'):
                 upper_bounds = [round(upper_bound, 2) for upper_bound in self.new_histogram.upper_bounds]
+
                 expect(upper_bounds).to(equal([0.76, 1.12, 1.48, 1.84, 2.20, 2.56, 2.92, 3.28, 3.64, 4.00]))
             
             with it('should have the heights for the new histogram.'):
                 heights = [round(height, 1) for height in self.new_histogram.heights]
+
                 expect(heights).to(equal([1.9, 1.9, 2.3, 2.6, 2.6, 2.9, 2.9, 4.6, 6.4, 6.4]))
             
             with after.all:
@@ -104,10 +108,12 @@ with description('Histogram:') as self:
             
             with it('should have an updated upper bound for each bar for the original histogram.'):
                 upper_bounds = [round(upper_bound, 2) for upper_bound in self.histogram.upper_bounds]
+
                 expect(upper_bounds).to(equal([-0.86, -0.32, 0.22, 0.76, 1.30, 1.84, 2.38, 2.92, 3.46, 4.00]))
             
             with it('should have the updated heights for the original histogram.'):
                 heights = [round(height, 1) for height in self.histogram.heights]
+
                 expect(heights).to(equal([1.5, 2.6, 4.7, 6.6, 7.6, 4.9, 4.5, 3.8, 7.8, 9.7]))
             
             with it('should have the original\'s maximum value as the minimum value for the new histogram.'):
@@ -121,10 +127,12 @@ with description('Histogram:') as self:
             
             with it('should have the upper bound for each bar for the new histogram.'):
                 upper_bounds = [round(upper_bound, 2) for upper_bound in self.new_histogram.upper_bounds]
+
                 expect(upper_bounds).to(equal([-4.64, -4.28, -3.92, -3.56, -3.20, -2.84, -2.48, -2.12, -1.76, -1.40]))
             
             with it('should have the heights for the new histogram.'):
                 heights = [round(height, 1) for height in self.new_histogram.heights]
+                
                 expect(heights).to(equal([8.1, 8.1, 6.0, 3.8, 3.8, 1.5, 1.5, 1.0, 0.5, 0.5]))
             
             with after.all:
