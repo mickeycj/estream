@@ -120,7 +120,8 @@ class EStream:
                 self.__clusters.remove(second_cluster)
     
     def __update_clusters(self):
-        pass
+        for cluster in self.__clusters:
+            cluster.is_active = cluster.weight >= self.active_threshold
     
     def __add(self, vector):
         pass
