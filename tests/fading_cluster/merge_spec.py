@@ -34,10 +34,12 @@ with description('Fading Cluster:') as self:
         
         with it('should have the updated LS.'):
             LS = [round(ls, 1) for ls in self.fading_cluster_1.LS]
+
             expect(LS).to(equal([1.0, 16.7]))
         
         with it('should have the updated SS.'):
             SS = [round(ss, 1) for ss in self.fading_cluster_1.SS]
+            
             expect(SS).to(equal([18.8, 29.9]))
         
         with it('should have the updated heights for the histograms.'):

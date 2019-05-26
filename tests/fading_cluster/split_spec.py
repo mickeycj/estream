@@ -66,18 +66,22 @@ with description('Fading Cluster:') as self:
             
             with it('should have the updated LS for the original fading cluster.'):
                 LS = [round(ls, 1) for ls in self.fading_cluster.LS]
+
                 expect(LS).to(equal([-88.5, 30.4]))
             
             with it('should have the updated SS for the original fading cluster.'):
                 SS = [round(ss, 1) for ss in self.fading_cluster.SS]
+
                 expect(SS).to(equal([323.7, 30.4]))
             
             with it('should have the updated histogram at the split attribute for the original fading cluster.'):
                 heights = [round(height, 1) for height in self.fading_cluster.histograms[0].heights]
+
                 expect(heights).to(equal([5.6, 4.9, 3.4, 3.1, 2.9, 2.6, 2.6, 2.7, 1.6, 1.0]))
             
             with it('should have the updated histogram at the other attribute for the original fading cluster.'):
                 heights = [round(height, 1) for height in self.fading_cluster.histograms[1].heights]
+
                 expect(heights).to(equal([30.4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]))
             
             with it('should have the weight for the new fading cluster'):
@@ -85,18 +89,22 @@ with description('Fading Cluster:') as self:
             
             with it('should have the LS for the new fading cluster.'):
                 LS = [round(ls, 1) for ls in self.new_fading_cluster.LS]
+
                 expect(LS).to(equal([78.7, 29.1]))
             
             with it('should have the SS for the new fading cluster.'):
                 SS = [round(ss, 1) for ss in self.new_fading_cluster.SS]
+
                 expect(SS).to(equal([242.3, 29.1]))
             
             with it('should have the histogram at the split attribute for the new fading cluster.'):
                 heights = [round(height, 1) for height in self.new_fading_cluster.histograms[0].heights]
+
                 expect(heights).to(equal([1.5, 1.5, 1.8, 2.0, 2.0, 2.3, 2.3, 4.1, 5.8, 5.8]))
             
             with it('should have the histogram at the other attribute for the new fading cluster.'):
                 heights = [round(height, 1) for height in self.new_fading_cluster.histograms[1].heights]
+                
                 expect(heights).to(equal([29.1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]))
             
             with after.all:
