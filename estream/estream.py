@@ -11,12 +11,14 @@ class EStream:
                  max_clusters=10,
                  stream_speed=10, decay_rate=0.1, remove_threshold=0.1,
                  merge_threshold=1.25,
+                 radius_threshold=3.0,
                  active_threshold=5.0):
         # Public fields
         self.max_clusters = max_clusters
         self.fading_factor = 2 ** (-decay_rate * (1 / stream_speed))
         self.remove_threshold = remove_threshold
         self.merge_threshold = merge_threshold
+        self.radius_threshold = radius_threshold
         self.active_threshold = active_threshold
         # Private fields
         self.__clusters = []
@@ -124,4 +126,17 @@ class EStream:
             cluster.is_active = cluster.weight >= self.active_threshold
     
     def __add(self, vector):
-        pass
+        min_distance = maxsize
+        max_weight = 0.0
+        candidate = None
+        for cluster in self.active_clusters:
+            distance = cluster.get_normalized_distance(vector)
+            if distance < min_distance or distance == min_distance and cluster.weight > max_weight:
+                min_distance = distance
+                max_weight = cluster.weight
+                candidate = cluster
+        
+        if candidate is not None and min_distance < self.radius_threshold:
+            candidate.add(vector)
+        else:
+            self.__clusters.append(FadingCluster(vector))
