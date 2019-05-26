@@ -12,7 +12,7 @@ with description('E-Stream:') as self:
     """
     with context('When trying to merge any pair of clusters'):
 
-        with context('and there is a pair of clusters close together,'):
+        with context('and there is not a pair of clusters close together,'):
 
             with before.all:
                 FadingCluster.id_counter = 0
@@ -67,7 +67,7 @@ with description('E-Stream:') as self:
                 self.estream._EStream__try_merge()
                 self.merged_cluster = self.estream._EStream__clusters[0]
             
-            with it('should have one less cluster.'):
+            with it('should have one fewer clusters.'):
                 expect(self.estream.num_clusters).to(equal(1))
         
             with it('should have the updated weight for the merged cluster.'):
