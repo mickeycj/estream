@@ -1,3 +1,5 @@
+from sys import maxsize
+
 from estream.fading_cluster import FadingCluster
 
 class EStream:
@@ -94,7 +96,28 @@ class EStream:
                         self.__clusters.remove(cluster_2)
     
     def __limit_clusters(self):
-        pass
+        while len(self.__clusters) > self.max_clusters:
+            clusters = self.inactive_clusters
+            if len(clusters) < 2:
+                clusters = self.active_clusters
+            
+            min_distance = maxsize
+            max_weight = 0.0
+            first_cluster, second_cluster = None, None
+            for idx, cluster_1 in enumerate(clusters):
+                next_idx = idx + 1
+                for cluster_2 in clusters[next_idx:]:
+                    distance = cluster_1.get_center_distance(cluster_2)
+                    sum_weight = cluster_1.weight + cluster_2.weight
+                    if distance < min_distance or distance == min_distance and sum_weight > max_weight:
+                        min_distance = distance
+                        max_weight = sum_weight
+                        first_cluster = cluster_1
+                        second_cluster = cluster_2
+            
+            if first_cluster is not None and second_cluster is not None:
+                first_cluster.merge(second_cluster)
+                self.__clusters.remove(second_cluster)
     
     def __update_clusters(self):
         pass
