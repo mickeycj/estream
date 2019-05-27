@@ -9,7 +9,8 @@ class EStream:
     """
     def __init__(self,
                  max_clusters=10,
-                 stream_speed=10, decay_rate=0.1, remove_threshold=0.1,
+                 stream_speed=10, decay_rate=0.1,
+                 remove_threshold=0.1,
                  merge_threshold=1.25,
                  radius_threshold=3.0,
                  active_threshold=5.0):
