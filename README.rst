@@ -149,5 +149,5 @@ contribute, please `fork this project <https://github.com/mickeycj/estream/issue
 issues and merge your code into the main branch.
 
 :Author: Chanon Jenakom
-:Version: 0.0.1
+:Version: 0.0.3
 :Dedicated: To DAKDL, Kasetsart University
